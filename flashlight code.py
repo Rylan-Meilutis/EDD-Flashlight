@@ -1,5 +1,6 @@
-from threading import Thread
 import time
+from threading import Thread
+
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
@@ -67,4 +68,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
