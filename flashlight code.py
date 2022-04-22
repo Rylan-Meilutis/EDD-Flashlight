@@ -50,8 +50,6 @@ def main():
     global do_blink
     t1 = Thread(target=blink, daemon=True)
     t1.start()
-
-    button = False
     GPIO.add_event_detect(button_id, GPIO.RISING)
     while True:
         get_button()
