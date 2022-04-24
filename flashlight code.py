@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 button_id = 16
-led = 17
+led = 18
 GPIO.setup(button_id, GPIO.IN)
 GPIO.setup(led, GPIO.OUT)
 state = 0
