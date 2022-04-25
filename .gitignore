@@ -4,13 +4,13 @@ __pycache__/
 *$py.class
 
 # C extensions
-*.so
+# *.so
 
 # Distribution / packaging
 .Python
 build/
 develop-eggs/
-dist/
+#dist/
 downloads/
 eggs/
 .eggs/
@@ -21,7 +21,7 @@ sdist/
 var/
 wheels/
 share/python-wheels/
-*.egg-info/
+#*.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
@@ -46,7 +46,7 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
+*.py,cover.so
 .hypothesis/
 .pytest_cache/
 cover/
