@@ -15,16 +15,17 @@ timed_out = True
 is_raspberry = True if platform.uname()[4] != "x86_64" and platform.uname()[4] != "AMD64" else False
 
 keystroke = False
+print_statement = ""
 
 
 def get_button():
     global state, keystroke
-    if is_raspberry:
+    if not is_raspberry:
         button = keystroke
     else:
         button = GPIO.event_detected(button_id)
     if button:
-        if is_raspberry:
+        if not is_raspberry:
             keystroke = False
         if timed_out:
             thr = Thread(target=click, daemon=True)
@@ -48,18 +49,18 @@ def click():
 
 
 def blink():
-    global do_blink
+    global do_blink, print_statement
     while True:
         if do_blink:
             GPIO.output(led, GPIO.HIGH)
-            if is_raspberry:
-                print("blink")
+            if not is_raspberry:
+                print_statement = "blink"
             time.sleep(0.002)
             GPIO.output(led, GPIO.LOW)
 
 
 def main():
-    global do_blink
+    global do_blink, print_statement
     t1 = Thread(target=blink, daemon=True)
     t1.start()
     GPIO.add_event_detect(button_id, GPIO.RISING)
@@ -69,15 +70,17 @@ def main():
         if state == 0:
             do_blink = False
             GPIO.output(led, GPIO.LOW)
-            if is_raspberry:
-                print("off", end='\r')
+            if not is_raspberry:
+                print_statement = "off"
         elif state == 1:
             do_blink = False
             GPIO.output(led, GPIO.HIGH)
-            if is_raspberry:
-                print("on", end='\r')
+            if not is_raspberry:
+                print_statement = "on"
         else:
             do_blink = True
+        if not is_raspberry:
+            print(print_statement, end='\r')
 
 
 def tester():
@@ -88,7 +91,7 @@ def tester():
 
 
 if __name__ == "__main__":
-    if is_raspberry:
+    if not is_raspberry:
         print("Press any key to simulate a button press")
         keys = Thread(target=tester, daemon=True)
         keys.start()
