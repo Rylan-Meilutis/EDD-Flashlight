@@ -53,7 +53,8 @@ def blink():
     while True:
         if do_blink:
             GPIO.output(led, GPIO.HIGH)
-            print("blink")
+            if is_raspberry:
+                print("blink")
             time.sleep(0.002)
             GPIO.output(led, GPIO.LOW)
 
@@ -70,11 +71,13 @@ def main():
         if state == 0:
             do_blink = False
             GPIO.output(led, GPIO.LOW)
-            print("off", end='\r')
+            if is_raspberry:
+                print("off", end='\r')
         elif state == 1:
             do_blink = False
             GPIO.output(led, GPIO.HIGH)
-            print("on", end='\r')
+            if is_raspberry:
+                print("on", end='\r')
         else:
             do_blink = True
 
@@ -88,6 +91,7 @@ def tester():
 
 if __name__ == "__main__":
     if is_raspberry:
+        print("Press any key to simulate a button press")
         keys = Thread(target=tester, daemon=True)
         keys.start()
     main()
