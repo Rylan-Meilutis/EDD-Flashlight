@@ -1,8 +1,8 @@
+import platform
 import time
 from threading import Thread
 
 import RPi.GPIO as GPIO
-import platform
 
 GPIO.setmode(GPIO.BOARD)
 button_id = 16
@@ -23,7 +23,6 @@ def get_button():
         button = keystroke
     else:
         button = GPIO.event_detected(button_id)
-    # print(button, end='\r')
     if button:
         if is_raspberry:
             keystroke = False
@@ -65,7 +64,6 @@ def main():
     t1.start()
     GPIO.add_event_detect(button_id, GPIO.RISING)
     while True:
-        # print(keystroke)
         get_button()
 
         if state == 0:
@@ -95,4 +93,3 @@ if __name__ == "__main__":
         keys = Thread(target=tester, daemon=True)
         keys.start()
     main()
-
