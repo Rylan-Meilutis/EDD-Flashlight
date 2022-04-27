@@ -10,8 +10,10 @@ led = 18
 GPIO.setup(button_id, GPIO.IN)
 GPIO.setup(led, GPIO.OUT)
 state = 0
+
 do_blink = False
 timed_out = True
+
 is_raspberry = True if platform.uname()[4] != "x86_64" and platform.uname()[4] != "AMD64" else False
 
 keystroke = False
