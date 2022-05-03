@@ -1,7 +1,8 @@
-from machine import ADC, Pin
+from machine import Pin
 
 high_level = False
 button = Pin(5, Pin.IN, Pin.PULL_UP)
+
 press = False
 switch = False
 
@@ -22,7 +23,7 @@ led = Pin(20, Pin.OUT)
 
 while True:
     toggle()
-    if high_level == 0:
+    if high_level:
         led.value(1)
     else:
         led.value(0)
